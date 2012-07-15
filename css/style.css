@@ -3,6 +3,11 @@
 	display:none;
 }
 
+.day .content {
+	z-index:100;
+	display:block;
+}
+
 /***** Start of split-cell, specific styles. ****
 */
 .SplitCellBackground, .TopOfCell, .BottomOfCell, .TopOfCellNo, .BottomOfCellNo {
@@ -10,7 +15,7 @@
     padding:            0;
     width:              100%;
     height:             50%;
-    z-index:            -10;
+    z-index:            0;
 }
 .SplitCellBackground {
     position:           absolute;
@@ -31,3 +36,17 @@
     background:         transparent;
 }
 /***** End of split-cell, specific styles. *****/
+
+.bubbleInfo {
+    position: relative;
+}
+
+.trigger {
+	z-index:10;
+}
+
+.popup {
+    position: absolute;
+    display: none; /* keeps the popup hidden if no JS available */
+    z-index:50;
+}

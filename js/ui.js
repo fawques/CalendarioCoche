@@ -200,7 +200,7 @@ var ui = {
 				}else if(msg.length > 0){
 					var auxiliar = new Date(mon);
 					_html += '<td onclick="javascript:reservar(' + auxiliar.setDate(dow.substr(-2)) + ');" class="' + cls + ' fondopartido" id="'+id+'">' 
-								+ dow.substr(-2) 
+								+ '<span class="day">' + dow.substr(-2) + '</span>'
 								+ '<br/>' 
 								+ '<span class="content">' 
 									+ msg 
@@ -208,8 +208,21 @@ var ui = {
 					if(tarde){
 						if(manana){
 							_html += '<div class="SplitCellBackground">'
-									+ '<div class="TopOfCell">&nbsp;<\/div><div class="BottomOfCell">&nbsp;<\/div>'
+								+ '<div class="bubbleInfo">'
+								+ '<div class="TopOfCell trigger">&nbsp;' 
+									+ '<div class="popup">'
+									+ '<p>Prueba: prueba</p>'
+									+ '</div>'
+								+ '</div>' 
 								+ '</div>'
+								/*+ '<div class="bubbleInfo">'*/
+								+ '<div class="BottomOfCell">'
+									+ '<div class="popup">'
+									+ '<p>Prueba: prueba</p>'
+									+ '</div>'
+								+ '<\/div>'
+								/*+ '</div>'*/
+							+ '</div>'
 						}
 						else{
 							_html += '<div class="SplitCellBackground">'
@@ -248,6 +261,7 @@ var ui = {
 		});
 		
 		ajustarColores();
+		bubbleInit();
 	},
 	
 	
@@ -329,5 +343,6 @@ $(document).ready(function(){
 	ui.renderTime();
 	
 	$(window).resize (function() {ajustarColores();});
+	
 
 });
