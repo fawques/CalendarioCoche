@@ -70,15 +70,28 @@ var ui = {
 		];
 		
 		// Events
-		var evnt = function(){return {"event" : [
-			 {"date":"12/25","title":"Christmas","periodo":"Tarde"}
-			,{"date":"1/01","title":"New Year's Day","periodo":"Mañana"}
-			,{"date":"11/22","title":"Thanksgiving"}
-			,{"date":"9/03","title":"Labor Day"}
-			,{"date":"7/04","title":"Independence Day"}
-			,{"date":"5/28","title":"Memorial Day"}
-			,{"date":"2/28","title":"President's Day"}
-		]};}();
+		//var evnt = //function(){
+			var evnt = {};
+			$.ajax({
+					url:"reservas.php",
+					async:false,
+					success:function(data, textStatus, xmlhttprequest){
+						evnt = {"event":$.parseJSON(xmlhttprequest.responseText)};
+					}
+			});
+			
+			
+			
+			/*
+			var evnt = {"event" : [
+			 {"date":"2012-12-25","title":"Christmas","periodo":"Tarde"}
+			,{"date":"2012-1-01","title":"New Year's Day","periodo":"Mañana"}
+			,{"date":"2012-11-22","title":"Thanksgiving"}
+			,{"date":"2012-9-03","title":"Labor Day"}
+			,{"date":"2012-7-04","title":"Independence Day"}
+			,{"date":"2012-5-28","title":"Memorial Day"}
+			,{"date":"2012-2-28","title":"President's Day"}
+		]};*///}();
 	
 		// Leap year
 		if(now.getYear()%4 == 0){
@@ -142,7 +155,7 @@ var ui = {
 				
 				// Check Event schedule										//Aquí deberá marcar el día como ocupado, según el atributo periodo: "Tarde" o "Mañana"
 				$.each(evnt.event,function(){	
-					if(this.date == mon.getMonth()+1 + "/" + dow.substr(-2)){
+					if(this.date == mon.getFullYear() + "-" + (mon.getMonth()+1) + "-" + dow.substr(-2)){
 						if(this.periodo == "Tarde"){
 							//Marcar tarde
 						}else if (this.periodo == "Mañana"){
