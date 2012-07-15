@@ -2,3 +2,32 @@
 	color:red;
 	display:none;
 }
+
+/***** Start of split-cell, specific styles. ****
+*/
+.SplitCellBackground, .TopOfCell, .BottomOfCell, .TopOfCellNo, .BottomOfCellNo {
+    margin:             0;
+    padding:            0;
+    width:              100%;
+    height:             50%;
+    z-index:            -10;
+}
+.SplitCellBackground {
+    position:           absolute;
+    width:              10em;
+    height:             10em;
+}
+.BottomOfCell {
+    background:         #4EE96D;
+}
+.TopOfCell {
+    background:         #45D061;
+}
+
+.BottomOfCellNo {
+    background:         transparent;
+}
+.TopOfCellNo {
+    background:         transparent;
+}
+/***** End of split-cell, specific styles. *****/

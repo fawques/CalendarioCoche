@@ -152,14 +152,23 @@ var ui = {
 					last = n[mon.getMonth()];
 				}
 				
-				
-				// Check Event schedule										//Aquí deberá marcar el día como ocupado, según el atributo periodo: "Tarde" o "Mañana"
+				var tarde = false;
+				var manana = false;
+				// Check Event schedule
 				$.each(evnt.event,function(){	
-					if(this.date == mon.getFullYear() + "-" + (mon.getMonth()+1) + "-" + dow.substr(-2)){
-						if(this.periodo == "Tarde"){
-							//Marcar tarde
-						}else if (this.periodo == "Mañana"){
-							//Marcar mañana
+					if(this.date == mon.getFullYear() 
+									+ "-" 
+									+ (function(){var aux = mon.getMonth()+1;
+										if(aux < 10)
+											return "0"+aux
+										else
+											return aux}()) 
+									+ "-" + dow.substr(-2))
+					{
+						if(this.periodo == "tar"){
+							tarde = true;
+						}else if (this.periodo == "ma"){
+							manana = true;
 						}
 						cls = "holiday";
 						msg = this.title;
@@ -190,7 +199,30 @@ var ui = {
 					_html += '<td>&nbsp;</td>';
 				}else if(msg.length > 0){
 					var auxiliar = new Date(mon);
-					_html += '<td onclick="javascript:reservar(' + auxiliar.setDate(dow.substr(-2)) + ');" class="' +cls+ '" id="'+id+'">' + dow.substr(-2) + '<br/><span class="content">'+msg+'</span></td>';
+					_html += '<td onclick="javascript:reservar(' + auxiliar.setDate(dow.substr(-2)) + ');" class="' + cls + ' fondopartido" id="'+id+'">' 
+								+ dow.substr(-2) 
+								+ '<br/>' 
+								+ '<span class="content">' 
+									+ msg 
+								+ '</span>';
+					if(tarde){
+						if(manana){
+							_html += '<div class="SplitCellBackground">'
+									+ '<div class="TopOfCell">&nbsp;<\/div><div class="BottomOfCell">&nbsp;<\/div>'
+								+ '</div>'
+						}
+						else{
+							_html += '<div class="SplitCellBackground">'
+									+ '<div class="TopOfCellNo">&nbsp;<\/div><div class="BottomOfCell">&nbsp;<\/div>'
+								+ '</div>'
+						}
+					}
+					else if(manana){
+						_html += '<div class="SplitCellBackground">'
+									+ '<div class="TopOfCell">&nbsp;<\/div><div class="BottomOfCellNo">&nbsp;<\/div>'
+								+ '</div>'
+					}
+					_html += '</td>';
 				}else{
 					var auxiliar = new Date(mon);
 					_html += '<td onclick="javascript:reservar(' + auxiliar.setDate(dow.substr(-2)) + ');"  class="' +cls+ '" id="'+id+'">' + dow.substr(-2) + '</td>';
@@ -200,6 +232,7 @@ var ui = {
 			
 			_html = "<tr>" +_html+ "</tr>";
 			b.append(_html);
+			
 		}
 		
 		$('#last').unbind('click').bind('click',function(){
@@ -214,7 +247,7 @@ var ui = {
 			ui.renderCalendar(nxt.getMonth(),nxt.getFullYear());
 		});
 		
-		
+		ajustarColores();
 	},
 	
 	
@@ -257,6 +290,32 @@ function reservar(dia){
 	}
 }
 
+function ajustarColores(){
+	// prueba para ajustar el color de TopOfCell y BottomOfCell a su celda correspondiente:
+	var zCellsToBackgroundify = $("td.fondopartido");
+
+	//--- Set each cell's funky background.
+	zCellsToBackgroundify.each (function (idx) {
+		zJnode = $(this);
+		var zCellBG_Frame                       = zJnode.find ('div.SplitCellBackground');
+
+        //--- Set the background container to match the cell dimensions.
+        zCellBG_Frame[0].style.width            = zJnode.outerWidth  (false) + 'px';
+        zCellBG_Frame[0].style.height           = zJnode.outerHeight (false) + 'px';
+
+        //--- Position absolutely; Adjust for margin, if needed.
+        var aContentPos                         = zJnode.offset ();
+
+        //--- Redundant for IE. Tested and IE really seems to need it, jQuery has failed me!
+        zCellBG_Frame[0].style.top              = aContentPos.top  + 'px';
+        zCellBG_Frame[0].style.left             = aContentPos.left + 'px';
+
+        zCellBG_Frame.offset (aContentPos);
+
+	} );
+
+}
+
 // Initialize
 ui.init();
 
@@ -269,4 +328,6 @@ $(document).ready(function(){
 	
 	ui.renderTime();
 	
+	$(window).resize (function() {ajustarColores();});
+
 });
