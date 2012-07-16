@@ -9,7 +9,7 @@ function refiring(){
 		$('.bubbleInfo',this).mouseover();
 		e.stopPropagation();
 	});
-	$('.holiday').live('mouseover',function(){
+	$('.holiday').live('mouseover',function(e){
 		$('.SplitCellBackground',this).trigger('mouseover');
 		e.stopPropagation();
 	});
@@ -22,7 +22,7 @@ function refiring(){
 		$('.bubbleInfo',this).mouseout();
 		e.stopPropagation();
 	});
-	$('.holiday').live('mouseout',function(){
+	$('.holiday').live('mouseout',function(e){
 		$('.SplitCellBackground',this).mouseout();
 		e.stopPropagation();
 	});
