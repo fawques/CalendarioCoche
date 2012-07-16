@@ -262,6 +262,7 @@ var ui = {
 		
 		ajustarColores();
 		bubbleInit();
+		//refiring();
 	},
 	
 	
@@ -343,6 +344,6 @@ $(document).ready(function(){
 	ui.renderTime();
 	
 	$(window).resize (function() {ajustarColores();});
-	
+	refiring();
 
 });
