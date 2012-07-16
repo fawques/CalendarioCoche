@@ -10,7 +10,7 @@ function refiring(){
 		e.stopPropagation();
 	});
 	$('.holiday').live('mouseover',function(e){
-		$('.SplitCellBackground',this).trigger('mouseover');
+		$('.SplitCellBackground',this).mouseover();
 		e.stopPropagation();
 	});
 	

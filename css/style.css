@@ -30,23 +30,31 @@
 }
 
 .BottomOfCellNo {
-    background:         transparent;
+    background:         #ffffff;
 }
 .TopOfCellNo {
-    background:         transparent;
+    background:         #ffffff;
 }
 /***** End of split-cell, specific styles. *****/
 
 .bubbleInfo {
-    position: relative;
+    /*position: static;*/
+    top:0;
+    left:0;
+    width:inherit;
+    height:inherit;
 }
 
 .trigger {
 	z-index:10;
+	height:inherit;
 }
 
 .popup {
     position: absolute;
     display: none; /* keeps the popup hidden if no JS available */
-    z-index:50;
+    z-index:500;
+    background:url('img/ico/apple-touch-icon-114x114-precomposed.png') repeat;
+    width:100px;
+    border:3px solid black;
 }

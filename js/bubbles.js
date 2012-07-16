@@ -5,14 +5,14 @@ function bubbleInit() {
 	$('.bubbleInfo').each(function () {
 		var distance = 10;
 		var time = 250;
-		var hideDelay = 500;
+		var hideDelay = 10;
 
 		var hideDelayTimer = null;
 
 		var beingShown = false;
 		var shown = false;
 		var trigger = $('.trigger', this);
-		var info = $('.popup', this).css('opacity', 0);
+		var info = $('.popup').css('opacity', 0);
 
 
 		$([trigger.get(0), info.get(0)]).mouseover(function () {
@@ -25,9 +25,10 @@ function bubbleInit() {
 				beingShown = true;
 
 				info.css({
-					top: -90,
-					left: 100,
-					display: 'block'
+					top: 210,
+					left: 400,
+					display: 'block',
+					background: 'white'
 				}).animate({
 					top: '-=' + distance + 'px',
 					opacity: 1

@@ -209,30 +209,36 @@ var ui = {
 						if(manana){
 							_html += '<div class="SplitCellBackground">'
 								+ '<div class="bubbleInfo">'
-								+ '<div class="TopOfCell trigger">&nbsp;' 
-									+ '<div class="popup">'
-									+ '<p>Prueba: prueba</p>'
-									+ '</div>'
-								+ '</div>' 
+									+ '<div class="trigger">'
+										+ '<div class="TopOfCell">&nbsp;' 
+										+ '</div>' 
+										+ '<div class="BottomOfCell">&nbsp;'
+										+ '<\/div>'
+									+'</div>'
 								+ '</div>'
-								/*+ '<div class="bubbleInfo">'*/
-								+ '<div class="BottomOfCell">'
-									+ '<div class="popup">'
-									+ '<p>Prueba: prueba</p>'
-									+ '</div>'
-								+ '<\/div>'
-								/*+ '</div>'*/
 							+ '</div>'
 						}
 						else{
 							_html += '<div class="SplitCellBackground">'
-									+ '<div class="TopOfCellNo">&nbsp;<\/div><div class="BottomOfCell">&nbsp;<\/div>'
+									+ '<div class="bubbleInfo">'
+										+ '<div class="trigger">'
+											+ '<div class="TopOfCellNo">&nbsp;<\/div>' 
+											+ '<div class="BottomOfCell">&nbsp;'
+											+ '<\/div>'
+										+ '</div>'
+									+ '</div>'
 								+ '</div>'
 						}
 					}
 					else if(manana){
 						_html += '<div class="SplitCellBackground">'
-									+ '<div class="TopOfCell">&nbsp;<\/div><div class="BottomOfCellNo">&nbsp;<\/div>'
+									+ '<div class="bubbleInfo">'
+										+ '<div class="trigger">'
+											+ '<div class="TopOfCell">&nbsp;' 
+											+ '</div>' 
+											+'<div class="BottomOfCellNo">&nbsp;<\/div>'
+										+ '</div>'
+									+ '</div>'
 								+ '</div>'
 					}
 					_html += '</td>';
