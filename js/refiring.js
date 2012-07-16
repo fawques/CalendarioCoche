@@ -1,29 +1,29 @@
 /* Probando a relanzar los eventos de ratón desde SplitCellBackground hacia el trigger del bubbletip */
 
 function refiring(){
-	$('.bubbleInfo').live('mouseover',function(e){
-		$('.trigger',this).mouseover();
+	$('.bubbleInfo').bind('mouseenter',function(e){
+		$('.trigger',this).mouseenter();
 		e.stopPropagation();
 	});
-	$('.SplitCellBackground').live('mouseover',function(e){
-		$('.bubbleInfo',this).mouseover();
+	$('.SplitCellBackground').bind('mouseenter',function(e){
+		$('.bubbleInfo',this).mouseenter();
 		e.stopPropagation();
 	});
-	$('.holiday').live('mouseover',function(e){
-		$('.SplitCellBackground',this).mouseover();
+	$('.holiday').bind('mouseenter',function(e){
+		$('.SplitCellBackground',this).mouseenter();
 		e.stopPropagation();
 	});
 	
-	$('.bubbleInfo').live('mouseout',function(e){
-		$('.trigger',this).mouseout();
+	$('.bubbleInfo').bind('mouseleave',function(e){
+		$('.trigger',this).mouseleave();
 		e.stopPropagation();
 	});
-	$('.SplitCellBackground').live('mouseout',function(e){
-		$('.bubbleInfo',this).mouseout();
+	$('.SplitCellBackground').bind('mouseleave',function(e){
+		$('.bubbleInfo',this).mouseleave();
 		e.stopPropagation();
 	});
-	$('.holiday').live('mouseout',function(e){
-		$('.SplitCellBackground',this).mouseout();
+	$('.holiday').bind('mouseleave',function(e){
+		$('.SplitCellBackground',this).mouseleave();
 		e.stopPropagation();
 	});
 }

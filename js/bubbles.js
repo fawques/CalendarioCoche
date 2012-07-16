@@ -15,7 +15,7 @@ function bubbleInit() {
 		var info = $('.popup').css('opacity', 0);
 
 
-		$([trigger.get(0), info.get(0)]).mouseover(function (e) {
+		$([trigger.get(0), info.get(0)]).mouseenter(function (e) {
 			if (hideDelayTimer) clearTimeout(hideDelayTimer);
 			if (beingShown || shown) {
 				// don't trigger the animation again
@@ -24,7 +24,19 @@ function bubbleInit() {
 				// reset position of info box
 				beingShown = true;
 				
+				// posicion del elemento seleccionado
 				var target_offset = $(this).offset();
+				
+				// informacion de persona y motivo de los dos periodos
+				var man = {persona: $(this).data("manpers") ,motivo: $(this).data("manmsg")};
+				var tar = {persona: $(this).data("tarpers") ,motivo: $(this).data("tarmsg")};
+				
+				$('.popup')
+					.empty()
+					.append('<h1>Mañana: </h1>')
+					.append('<p><strong>Persona: </strong> ' + man.persona + '</p><p><strong>Motivo: </strong> ' + man.motivo + '</p>')
+					.append('<h1>Tarde: </h1>')
+					.append('<p><strong>Persona: </strong> ' + tar.persona + '</p><p><strong>Motivo: </strong> ' + tar.motivo + '</p>');
 				
 				info.css({
 					top: (target_offset.top - 20) + "px",
@@ -41,7 +53,7 @@ function bubbleInit() {
 			}
 
 			return false;
-		}).mouseout(function () {
+		}).mouseleave(function () {
 			if (hideDelayTimer) clearTimeout(hideDelayTimer);
 			hideDelayTimer = setTimeout(function () {
 				hideDelayTimer = null;

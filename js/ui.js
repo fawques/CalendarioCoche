@@ -8,8 +8,9 @@ var ui = {
 		// HTML renderers
 		var _html = "";
 		var cls = "";
-		var msg = "";
+		var persona = "";
 		var id = "";
+		var motivo = "";
 		
 		// Create current date object
 		var now = new Date();
@@ -133,7 +134,8 @@ var ui = {
 			for(var j=0;j<d.length;j++){
 				
 				cls = "";
-				msg = "";
+				persona = "";
+				motivo = "";
 				id = "";
 				
 				// Determine if we have reached the first of the month
@@ -171,7 +173,8 @@ var ui = {
 							manana = true;
 						}
 						cls = "holiday";
-						msg = this.title;
+						persona = this.title;
+						motivo = this.motivo;
 					}
 				});
 				
@@ -197,19 +200,16 @@ var ui = {
 				// Render HTML
 				if(dow == 0){
 					_html += '<td>&nbsp;</td>';
-				}else if(msg.length > 0){
+				}else if(persona.length > 0){
 					var auxiliar = new Date(mon);
 					_html += '<td onclick="javascript:reservar(' + auxiliar.setDate(dow.substr(-2)) + ');" class="' + cls + ' fondopartido" id="'+id+'">' 
 								+ '<span class="day">' + dow.substr(-2) + '</span>'
-								+ '<br/>' 
-								+ '<span class="content">' 
-									+ msg 
-								+ '</span>';
+								+ '<br/>'
 					if(tarde){
 						if(manana){
 							_html += '<div class="SplitCellBackground">'
 								+ '<div class="bubbleInfo">'
-									+ '<div class="trigger">'
+									+ '<div class="trigger">'							// poner data-man y data-tar
 										+ '<div class="TopOfCell">&nbsp;' 
 										+ '</div>' 
 										+ '<div class="BottomOfCell">&nbsp;'
@@ -221,7 +221,7 @@ var ui = {
 						else{
 							_html += '<div class="SplitCellBackground">'
 									+ '<div class="bubbleInfo">'
-										+ '<div class="trigger">'
+										+ '<div class="trigger" data-tarpers="' + persona + '" data-tarmsg="' + motivo + '" data-manpers="" data-manmsg="">'
 											+ '<div class="TopOfCellNo">&nbsp;<\/div>' 
 											+ '<div class="BottomOfCell">&nbsp;'
 											+ '<\/div>'
@@ -233,7 +233,7 @@ var ui = {
 					else if(manana){
 						_html += '<div class="SplitCellBackground">'
 									+ '<div class="bubbleInfo">'
-										+ '<div class="trigger">'
+										+ '<div class="trigger" data-manpers="' + persona + '" data-manmsg="' + motivo + '" data-tarpers="" data-tarmsg="">'
 											+ '<div class="TopOfCell">&nbsp;' 
 											+ '</div>' 
 											+'<div class="BottomOfCellNo">&nbsp;<\/div>'
@@ -248,7 +248,6 @@ var ui = {
 				}
 				
 			}
-			
 			_html = "<tr>" +_html+ "</tr>";
 			b.append(_html);
 			
@@ -268,10 +267,10 @@ var ui = {
 		
 		ajustarColores();
 		bubbleInit();
-		//refiring();
+		refiring();
 	},
 	
-	
+	/*
 	// Render Clock
 	"renderTime" : function(){
 		var now = new Date();
@@ -294,7 +293,7 @@ var ui = {
 		}
 		
 		setTimeout(doit,500);
-	},
+	},*/
 	
 	
 	// Initialization
@@ -347,7 +346,7 @@ $(document).ready(function(){
 	// Render the calendar
 	ui.renderCalendar();
 	
-	ui.renderTime();
+	/*ui.renderTime();*/
 	
 	$(window).resize (function() {ajustarColores();});
 	refiring();
