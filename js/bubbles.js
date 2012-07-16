@@ -15,7 +15,7 @@ function bubbleInit() {
 		var info = $('.popup').css('opacity', 0);
 
 
-		$([trigger.get(0), info.get(0)]).mouseover(function () {
+		$([trigger.get(0), info.get(0)]).mouseover(function (e) {
 			if (hideDelayTimer) clearTimeout(hideDelayTimer);
 			if (beingShown || shown) {
 				// don't trigger the animation again
@@ -23,10 +23,12 @@ function bubbleInit() {
 			} else {
 				// reset position of info box
 				beingShown = true;
-
+				
+				var target_offset = $(this).offset();
+				
 				info.css({
-					top: 210,
-					left: 400,
+					top: (target_offset.top - 20) + "px",
+					left: target_offset.left + "px",
 					display: 'block',
 					background: 'white'
 				}).animate({
