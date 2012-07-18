@@ -217,8 +217,7 @@ var ui = {
 							_html += '<div class="SplitCellBackground">'
 								+ '<div class="bubbleInfo">'
 									+ '<div class="trigger" data-day="' + auxiliar + '" data-tarpers="' + personatar + '" data-tarmsg="' + motivotar + '" data-manpers="' + personaman + '" data-manmsg="' + motivoman + '">'
-										+ '<div class="TopOfCell">&nbsp;' 
-										+ '</div>' 
+										+ '<div class="TopOfCell">&nbsp;</div>' 
 										+ '<div class="BottomOfCell">&nbsp;'
 										+ '<\/div>'
 									+'</div>'
@@ -241,8 +240,7 @@ var ui = {
 						_html += '<div class="SplitCellBackground">'
 									+ '<div class="bubbleInfo">'
 										+ '<div class="trigger" data-day="' + auxiliar + '" data-manpers="' + personaman + '" data-manmsg="' + motivoman + '" data-tarpers="" data-tarmsg="">'
-											+ '<div class="TopOfCell">&nbsp;' 
-											+ '</div>' 
+											+ '<div class="TopOfCell">&nbsp;</div>' 
 											+'<div class="BottomOfCellNo">&nbsp;<\/div>'
 										+ '</div>'
 									+ '</div>'
@@ -274,7 +272,6 @@ var ui = {
 		
 		ajustarColores();
 		bubbleInit();
-		refiring();
 	},
 	
 	/*

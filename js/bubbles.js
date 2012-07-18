@@ -61,7 +61,6 @@ function bubbleInit() {
 						left : (target_offset.left + ($(this).width() - info.width())/2) + "px",
 						display : 'block',
 						background : 'white',
-						/*maxHeight : "400px",*/
 						overflow : "hidden"
 					}).animate({
 						top : '-=' + distance + 'px',

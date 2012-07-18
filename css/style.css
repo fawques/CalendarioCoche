@@ -3,11 +3,11 @@
 	display:none;
 }
 
-.day .content {
-	z-index:100;
+.day {
+	z-index:2;
+	position: relative;
 	display:block;
 }
-
 /***** Start of split-cell, specific styles. ****
 */
 .SplitCellBackground, .TopOfCell, .BottomOfCell, .TopOfCellNo, .BottomOfCellNo {
@@ -15,7 +15,7 @@
     padding:            0;
     width:              100%;
     height:             50%;
-    z-index:            -1;
+    z-index:            0;
 }
 .SplitCellBackground {
     position:           absolute;
@@ -24,21 +24,29 @@
 }
 .BottomOfCell {
     background:         #45D061;
+    z-index: 0;
+    position: relative;
 }
 .TopOfCell {
     background:         #4EE96D;
+    z-index: 0;
+    position: relative;
 }
 
 .BottomOfCellNo {
     background:         #ffffff;
+    z-index: 0;
+    position: relative;
 }
 .TopOfCellNo {
     background:         #ffffff;
+    z-index: 0;
+    position: relative;
 }
 /***** End of split-cell, specific styles. *****/
 
+
 .bubbleInfo {
-    /*position: static;*/
     top:0;
     left:0;
     width:inherit;
@@ -53,7 +61,7 @@
 .popup {
     position: absolute;
     display: none; /* keeps the popup hidden if no JS available */
-    z-index:500;
+    z-index:100;
     padding:10px;
     border:3px solid black;
     height:50%;
