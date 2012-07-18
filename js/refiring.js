@@ -1,19 +1,20 @@
 /* Probando a relanzar los eventos de ratón desde SplitCellBackground hacia el trigger del bubbletip */
 
 function refiring(){
-	$('.bubbleInfo').bind('mouseenter',function (e){
+	contador3 = 0;
+	/*$('.bubbleInfo').bind('mouseenter',function (e){
 		console.log("Ratón entra en: " + this + ", e = " + e);
 		e.stopPropagation();
 	});
 	$('.SplitCellBackground').bind('mouseenter',function (e){
 		console.log("Ratón entra en: " + this+ ", e = " + e);
 		e.stopPropagation();
-	});
-	$('.holiday').bind('mouseenter',function (e){
-		console.log("Ratón entra en: " + this+ ", e = " + e);
+	});*/
+	$('.holiday').bind('mouseover',function (e){
+		$('.trigger',this).mouseover();
 		e.stopPropagation();
 	});
-	
+	/*
 	$('.bubbleInfo').bind('mouseleave',function(e){
 		console.log("Ratón sale de: " + this+ ", e = " + e);
 		e.stopPropagation();
@@ -21,9 +22,9 @@ function refiring(){
 	$('.SplitCellBackground').bind('mouseleave',function(e){
 		console.log("Ratón sale de: " + this+ ", e = " + e);
 		e.stopPropagation();
-	});
-	$('.holiday').bind('mouseleave',function(e){
-		console.log("Ratón sale de: " + this+ ", e = " + e);
+	});*/
+	$('.holiday').bind('mouseout',function(e){
+		$('.popup').mouseout();
 		e.stopPropagation();
 	});
 }
