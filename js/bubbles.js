@@ -5,7 +5,7 @@ function bubbleInit() {
 	$('.bubbleInfo').each(function () {
 		var distance = 10;
 		var time = 250;
-		var hideDelay = 10;
+		var hideDelay = 250;
 
 		var hideDelayTimer = null;
 
@@ -13,16 +13,14 @@ function bubbleInit() {
 		var shown = false;
 		var trigger = $('.trigger', this);
 		var info = $('.popup').css('opacity', 0);
-
-
-		$([trigger.get(0), info.get(0)]).mouseenter(function (e) {
+		
+		function showPopup(e) {
 			if (hideDelayTimer) clearTimeout(hideDelayTimer);
 			if (beingShown || shown) {
 				// don't trigger the animation again
 				return;
 			} else {
-				// reset position of info box
-				beingShown = true;
+				
 				
 				// posicion del elemento seleccionado
 				var target_offset = $(this).offset();
@@ -30,44 +28,84 @@ function bubbleInit() {
 				// informacion de persona y motivo de los dos periodos
 				var man = {persona: $(this).data("manpers") ,motivo: $(this).data("manmsg")};
 				var tar = {persona: $(this).data("tarpers") ,motivo: $(this).data("tarmsg")};
+				var day = new Date($(this).data("day"));
 				
-				$('.popup')
+				if (man.persona != undefined || tar.persona != undefined) {
+				
+					info.css('bottom', '')
+						.css('left','');
+					// reset position of info box
+					beingShown = true;
+					
+					if (man.persona == "") {man.persona = "LIBRE"};
+					if (tar.persona == "") {tar.persona = "LIBRE"};
+					if (man.motivo == "") {man.motivo = "&nbsp;"};
+					if (tar.motivo == "") {tar.motivo = "&nbsp;"};
+					
+					
+					info.append('<h1>' + day.getDate() + '/' + (day.getMonth()+1) + '/' + day.getFullYear() + '</h1>')
+						.append('<span style="display:inline"><h2>Mañana: </h2>')
+						.append('<p><strong>Persona: </strong> ' + man.persona + '</p><p><strong>Motivo: </strong> ' + man.motivo + '</p></span>')
+						//.append('<hr>')
+						.append('<span><h2>Tarde: </h2>')
+						.append('<p><strong>Persona: </strong> ' + tar.persona + '</p><p><strong>Motivo: </strong> ' + tar.motivo + '</p></span>');
+					
+					var newTop = target_offset.top - info.height() - 10;
+					if (newTop < 0) {
+						newTop = target_offset.top + $(this).height();
+					};
+					
+					info.css({
+						top : (newTop) + "px",
+						left : (target_offset.left + ($(this).width() - info.width())/2) + "px",
+						display : 'block',
+						background : 'white',
+						/*maxHeight : "400px",*/
+						overflow : "hidden"
+					}).animate({
+						top : '-=' + distance + 'px',
+						opacity : 1
+					}, time, 'swing', function() {
+						beingShown = false;
+						shown = true;
+					}); 
+
+				}
+			}
+			e.stopPropagation();
+			return false;
+		
+			}
+			
+			function hidePopup(e) {
+				if (hideDelayTimer)
+					clearTimeout(hideDelayTimer);
+				hideDelayTimer = setTimeout(function() {
+					hideDelayTimer = null;
+					info.animate({
+						top : '+=' + distance + 'px',
+						opacity : 0
+					}, time, 'swing', function() {
+						shown = false;
+					})
 					.empty()
-					.append('<h1>Mañana: </h1>')
-					.append('<p><strong>Persona: </strong> ' + man.persona + '</p><p><strong>Motivo: </strong> ' + man.motivo + '</p>')
-					.append('<h1>Tarde: </h1>')
-					.append('<p><strong>Persona: </strong> ' + tar.persona + '</p><p><strong>Motivo: </strong> ' + tar.motivo + '</p>');
-				
-				info.css({
-					top: (target_offset.top - 20) + "px",
-					left: target_offset.left + "px",
-					display: 'block',
-					background: 'white'
-				}).animate({
-					top: '-=' + distance + 'px',
-					opacity: 1
-				}, time, 'swing', function() {
-					beingShown = false;
-					shown = true;
-				});
+					.removeAttr('style')
+					.css('opacity',0)
+					.css('display','none');
+
+				}, hideDelay);
+				e.stopPropagation();
+				return false;
 			}
 
-			return false;
-		}).mouseleave(function () {
-			if (hideDelayTimer) clearTimeout(hideDelayTimer);
-			hideDelayTimer = setTimeout(function () {
-				hideDelayTimer = null;
-				info.animate({
-					top: '-=' + distance + 'px',
-					opacity: 0
-				}, time, 'swing', function () {
-					shown = false;
-					info.css('display', 'none');
-				});
 
-			}, hideDelay);
-
-			return false;
+		info.bind('mouseover',showPopup);
+		info.bind('mouseout',hidePopup);
+		
+		trigger.each(function(){
+			$(this).bind('mouseover',showPopup);
+			$(this).bind('mouseout',hidePopup); 
 		});
 	});
 };
+

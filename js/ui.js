@@ -8,9 +8,12 @@ var ui = {
 		// HTML renderers
 		var _html = "";
 		var cls = "";
-		var persona = "";
+		
 		var id = "";
-		var motivo = "";
+		var personaman = "";
+		var motivoman = "";
+		var personatar = "";
+		var motivotar = "";
 		
 		// Create current date object
 		var now = new Date();
@@ -134,8 +137,10 @@ var ui = {
 			for(var j=0;j<d.length;j++){
 				
 				cls = "";
-				persona = "";
-				motivo = "";
+				personaman = "";
+				motivoman = "";
+				personatar = "";
+				motivotar = "";
 				id = "";
 				
 				// Determine if we have reached the first of the month
@@ -159,22 +164,24 @@ var ui = {
 				// Check Event schedule
 				$.each(evnt.event,function(){	
 					if(this.date == mon.getFullYear() 
-									+ "-" 
-									+ (function(){var aux = mon.getMonth()+1;
+							+ "-"
+							+ (function(){var aux = mon.getMonth()+1;
 										if(aux < 10)
 											return "0"+aux
 										else
-											return aux}()) 
-									+ "-" + dow.substr(-2))
+											return aux})()
+							+ "-" + dow.substr(-2))
 					{
 						if(this.periodo == "tar"){
 							tarde = true;
+							personatar = this.title;
+							motivotar = this.motivo;
 						}else if (this.periodo == "ma"){
 							manana = true;
+							personaman = this.title;
+							motivoman = this.motivo;
 						}
 						cls = "holiday";
-						persona = this.title;
-						motivo = this.motivo;
 					}
 				});
 				
@@ -200,7 +207,7 @@ var ui = {
 				// Render HTML
 				if(dow == 0){
 					_html += '<td>&nbsp;</td>';
-				}else if(persona.length > 0){
+				}else if(personaman.length > 0 || personatar.length > 0){
 					var auxiliar = new Date(mon);
 					_html += '<td onclick="javascript:reservar(' + auxiliar.setDate(dow.substr(-2)) + ');" class="' + cls + ' fondopartido" id="'+id+'">' 
 								+ '<span class="day">' + dow.substr(-2) + '</span>'
@@ -209,7 +216,7 @@ var ui = {
 						if(manana){
 							_html += '<div class="SplitCellBackground">'
 								+ '<div class="bubbleInfo">'
-									+ '<div class="trigger">'							// poner data-man y data-tar
+									+ '<div class="trigger" data-day="' + auxiliar + '" data-tarpers="' + personatar + '" data-tarmsg="' + motivotar + '" data-manpers="' + personaman + '" data-manmsg="' + motivoman + '">'
 										+ '<div class="TopOfCell">&nbsp;' 
 										+ '</div>' 
 										+ '<div class="BottomOfCell">&nbsp;'
@@ -221,7 +228,7 @@ var ui = {
 						else{
 							_html += '<div class="SplitCellBackground">'
 									+ '<div class="bubbleInfo">'
-										+ '<div class="trigger" data-tarpers="' + persona + '" data-tarmsg="' + motivo + '" data-manpers="" data-manmsg="">'
+										+ '<div class="trigger" data-day="' + auxiliar + '" data-tarpers="' + personatar + '" data-tarmsg="' + motivotar + '" data-manpers="" data-manmsg="">'
 											+ '<div class="TopOfCellNo">&nbsp;<\/div>' 
 											+ '<div class="BottomOfCell">&nbsp;'
 											+ '<\/div>'
@@ -233,7 +240,7 @@ var ui = {
 					else if(manana){
 						_html += '<div class="SplitCellBackground">'
 									+ '<div class="bubbleInfo">'
-										+ '<div class="trigger" data-manpers="' + persona + '" data-manmsg="' + motivo + '" data-tarpers="" data-tarmsg="">'
+										+ '<div class="trigger" data-day="' + auxiliar + '" data-manpers="' + personaman + '" data-manmsg="' + motivoman + '" data-tarpers="" data-tarmsg="">'
 											+ '<div class="TopOfCell">&nbsp;' 
 											+ '</div>' 
 											+'<div class="BottomOfCellNo">&nbsp;<\/div>'
@@ -349,6 +356,5 @@ $(document).ready(function(){
 	/*ui.renderTime();*/
 	
 	$(window).resize (function() {ajustarColores();});
-	refiring();
 
 });
