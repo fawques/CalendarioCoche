@@ -309,8 +309,24 @@ var ui = {
 function reservar(dia){
 	if(logged)
 	{
-		aux = new Date(dia);
-		alert("vas a reservar para el día " + aux.getDate() + "/" + (aux.getMonth()+1) + "/" + aux.getFullYear() );
+		/*$('.popup').unbind('mouseover').unbind('mouseout');
+		$('.trigger').unbind('mouseover').unbind('mouseout');*/
+		var aux = new Date(dia);
+		$('#diaModal').html(aux.getDate() + "/" + (aux.getMonth()+1) + "/" + aux.getFullYear());
+		
+		$('#fecha').val(aux.getFullYear() + "-" + (aux.getMonth()+1) + "-" + aux.getDate());
+		
+		$('#persona').val(nombre);
+		
+		$('.nuevaReserva').css({
+			opacity:0,
+			display:'block'
+		})
+		.animate({
+			opacity : 1
+		}, 500, 'swing');
+		
+		/*bubbleInit();*/
 	}
 }
 
@@ -353,5 +369,14 @@ $(document).ready(function(){
 	/*ui.renderTime();*/
 	
 	$(window).resize (function() {ajustarColores();});
+	
+	$('.nuevaReserva .close').click(function(){
+		$('.nuevaReserva').animate({
+			opacity:0
+		}, 500, 'swing')
+		.css({
+			display: 'none'
+		});
+	})
 
 });

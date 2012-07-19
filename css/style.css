@@ -66,3 +66,48 @@
     border:3px solid black;
     height:50%;
 }
+
+.nuevaReserva {
+	width: 500px;
+	height: 350px;
+	position: absolute;
+	left: 25%;
+	top: 25%;
+	border: 3px solid black;
+	background: #8F8F8F;
+	z-index: 1000;
+	display: none;
+	/*display: block;*/
+}
+
+.nuevaReserva form {
+	padding: 20px;
+	padding-top: 10px;
+	
+}
+
+.nuevaReserva form *{
+	float: none;
+	color: black; 
+}
+
+.nuevaReserva form h3 {
+	text-align: center;
+	margin-top: 0;
+}
+
+.nuevaReserva form .right {
+	float:right;
+}
+
+.nuevaReserva form textarea {
+	resize: none;
+	width: 448px;
+	height: 90px;
+}
+
+.nuevaReserva fieldset {
+	margin-top: 20px;
+	margin-bottom:0;
+	padding-top: 0;
+}

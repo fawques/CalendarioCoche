@@ -22,7 +22,6 @@
 	<script src="js/bubbles.js" type="text/javascript"></script>
 	<script src="js/ui.js" type="text/javascript"></script>
 	<script src="js/login.js" type="text/javascript"></script>
-	<script src="js/refiring.js" type="text/javascript"></script>
 	
 	
 	<!-- Favorite/Touch icons -->
@@ -77,7 +76,30 @@
 			</div>
 		</div>
 	</div> 
-<div class="popup">
+<div class="popup"></div>
+<div class="nuevaReserva">
+	<button type="button" class="btn close">X</button>
+	<form method="post" action="nuevareserva.php" >
+		<h3>Rellena el formulario para reservar el coche el día <strong id="diaModal"></strong></h3>
+		<fieldset>
+			<p><strong>Elige el periodo en el que quieres el coche: </strong></p>
+			<label for="rBma"> Mañana
+				<input type="radio" name="periodo" id="rBma" value="ma" checked/>
+			</label>&nbsp;&nbsp; <label for="rBtar"> Tarde
+				<input type="radio" name="periodo" id="rBtar" value="tar"/>
+			</label>
+		</fieldset>
+		<fieldset>
+			<label for="txtaMot">
+				<strong>Explica por qué lo necesitas: </strong> <br />
+				<textarea name="motivo" id="txtaMot" cols="400"></textarea> 
+			</label>
+		</fieldset><br />
+		<input type="hidden" id="fecha" name="fecha" value="" />
+		<input type="hidden" id="persona" name="persona" value="" />
+		<button type="submit" class="btn right">Reservar</button>
+			
+	</form>
 </div>
 </body>
 </html>

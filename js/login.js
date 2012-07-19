@@ -1,6 +1,6 @@
 function login(){
 	nombre = $("#nombre").val();
-	pass = $("#pass").val();
+	var pass = $("#pass").val();
 	$.post('login.php', {
 			"nombre": nombre,
 			"pass": pass
