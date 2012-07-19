@@ -15,7 +15,6 @@ function bubbleInit() {
 		var info = $('.popup').css('opacity', 0);
 		
 		function showPopup(e) {
-			contador3++;
 			if (hideDelayTimer) clearTimeout(hideDelayTimer);
 			if (beingShown || shown) {
 				// don't trigger the animation again
