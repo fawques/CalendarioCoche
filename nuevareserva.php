@@ -1,13 +1,16 @@
 <?php
-	$con = mysql_connect("localhost","root");
+	
+$con = mysql_connect("mysql.hostinger.es","u715337862_admin","qwerty123");
 	if (!$con)
 	  {
 	  die('Could not connect: ' . mysql_error());
 	  }
 
-	$datos = $_POST;
+        $datos = $_POST;
 		
-	$myQuery = "INSERT INTO  coche.reservas (`Fecha`, `Periodo`, `Persona`, `Motivo`) VALUES ('" . $datos['fecha'] . "','" . $datos['periodo'] . "','" . $datos['persona'] . "','" . $datos['motivo'] . "')";
+        mysql_select_db("u715337862_coche") or die(mysql_error());	$datos = $_POST;
+		
+	$myQuery = "INSERT INTO  reservas (`Fecha`, `Periodo`, `Persona`, `Motivo`) VALUES ('" . $datos['fecha'] . "','" . $datos['periodo'] . "','" . $datos['persona'] . "','" . $datos['motivo'] . "')";
 	$result = mysql_query($myQuery) or die($myQuery."<br/><br/>".mysql_error());
 
 	/*$response = "[";
