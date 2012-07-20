@@ -32,10 +32,6 @@
 	<link rel="apple-touch-icon" sizes="114x114" href="img/ico/datetime-apple-114x114.png">
 	
 
-	<script>
-		logged = false;
-	</script>
-
 </head>
 
 <body>
@@ -70,7 +66,7 @@
 						<label>Entra para reservar</label>
 						<input type="text" name="nombre" id="nombre" placeholder="Nombre"/>
 						<input type="password" name="pass" id="pass" placeholder="Contraseña"/>
-						<input type="button" onclick="javascript:login()" class="btn" value="Entrar"/>
+						<input type="button" id="btnLogin" class="btn" value="Entrar"/>
 						<p class="error">Usuario o contraseña incorrecto</p>
 					</form>
 				</div>
@@ -98,7 +94,7 @@
 		</fieldset><br />
 		<input type="hidden" id="fecha" name="fecha" value="" />
 		<input type="hidden" id="persona" name="persona" value="" />
-		<button type="button" onclick="javascript:procesarReserva()" class="btn right">Reservar</button>
+		<button type="button" id="btnClose" class="btn right">Reservar</button>
 			
 	</form>
 </div>

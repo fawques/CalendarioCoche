@@ -396,7 +396,7 @@ ui.init();
 
 // Load
 $(document).ready(function(){
-		
+	logged = false;
 	// Render the calendar
 	ui.renderCalendar();
 	
@@ -412,5 +412,9 @@ $(document).ready(function(){
 			display: 'none'
 		});
 	})
+	
+	$('#btnClose').click(procesarReserva);
+	$('#btnLogin').click(login);
+	
 
 });
