@@ -22,6 +22,7 @@
 	<script src="js/bubbles.js" type="text/javascript"></script>
 	<script src="js/ui.js" type="text/javascript"></script>
 	<script src="js/login.js" type="text/javascript"></script>
+	<script src="js/reservas.js" type="text/javascript"></script>
 	
 	
 	<!-- Favorite/Touch icons -->
@@ -79,7 +80,7 @@
 <div class="popup"></div>
 <div class="nuevaReserva">
 	<button type="button" class="btn close">X</button>
-	<form method="post" action="nuevareserva.php" >
+	<form method="post">
 		<h3>Rellena el formulario para reservar el coche el día <strong id="diaModal"></strong></h3>
 		<fieldset>
 			<p><strong>Elige el periodo en el que quieres el coche: </strong></p>
@@ -97,7 +98,7 @@
 		</fieldset><br />
 		<input type="hidden" id="fecha" name="fecha" value="" />
 		<input type="hidden" id="persona" name="persona" value="" />
-		<button type="submit" class="btn right">Reservar</button>
+		<button type="button" onclick="javascript:procesarReserva()" class="btn right">Reservar</button>
 			
 	</form>
 </div>
