@@ -274,7 +274,7 @@ var ui = {
 		bubbleInit();
 	},
 	
-	/*
+	
 	// Render Clock
 	"renderTime" : function(){
 		var now = new Date();
@@ -297,7 +297,7 @@ var ui = {
 		}
 		
 		setTimeout(doit,500);
-	},*/
+	},
 	
 	
 	// Initialization
@@ -400,7 +400,7 @@ $(document).ready(function(){
 	// Render the calendar
 	ui.renderCalendar();
 	
-	/*ui.renderTime();*/
+	ui.renderTime();
 	
 	$(window).resize (function() {ajustarColores();});
 	
