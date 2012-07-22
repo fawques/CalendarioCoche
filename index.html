@@ -18,10 +18,10 @@
 	
 	<!-- JavaScript -->
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js" type="text/javascript"></script>
-	<!--<script src="js/jquery-1.7.2.min.js" type="text/javascript"></script>-->
 	<script src="js/bubbles.js" type="text/javascript"></script>
 	<script src="js/ui.js" type="text/javascript"></script>
 	<script src="js/login.js" type="text/javascript"></script>
+	<script src="js/reservas.js" type="text/javascript"></script>
 	
 	
 	<!-- Favorite/Touch icons -->
@@ -30,10 +30,6 @@
 	<link rel="apple-touch-icon" sizes="72x72" href="img/ico/datetime-apple-72x72.png">
 	<link rel="apple-touch-icon" sizes="114x114" href="img/ico/datetime-apple-114x114.png">
 	
-
-	<script>
-		logged = false;
-	</script>
 
 </head>
 
@@ -69,7 +65,7 @@
 						<label>Entra para reservar</label>
 						<input type="text" name="nombre" id="nombre" placeholder="Nombre"/>
 						<input type="password" name="pass" id="pass" placeholder="Contraseña"/>
-						<input type="button" onclick="javascript:login()" class="btn" value="Entrar"/>
+						<input type="button" id="btnLogin" class="btn" value="Entrar"/>
 						<p class="error">Usuario o contraseña incorrecto</p>
 					</form>
 				</div>
@@ -79,7 +75,7 @@
 <div class="popup"></div>
 <div class="nuevaReserva">
 	<button type="button" class="btn close">X</button>
-	<form method="post" action="nuevareserva.php" >
+	<form method="post">
 		<h3>Rellena el formulario para reservar el coche el día <strong id="diaModal"></strong></h3>
 		<fieldset>
 			<p><strong>Elige el periodo en el que quieres el coche: </strong></p>
@@ -97,7 +93,7 @@
 		</fieldset><br />
 		<input type="hidden" id="fecha" name="fecha" value="" />
 		<input type="hidden" id="persona" name="persona" value="" />
-		<button type="submit" class="btn right">Reservar</button>
+		<button type="button" id="btnClose" class="btn right">Reservar</button>
 			
 	</form>
 </div>

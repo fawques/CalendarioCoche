@@ -209,7 +209,7 @@ var ui = {
 					_html += '<td>&nbsp;</td>';
 				}else if(personaman.length > 0 || personatar.length > 0){
 					var auxiliar = new Date(mon);
-					_html += '<td onclick="javascript:reservar(' + auxiliar.setDate(dow.substr(-2)) + ');" class="' + cls + ' fondopartido" id="'+id+'">' 
+					_html += '<td onclick="javascript:reservar(' + auxiliar.setDate(dow.substr(-2)) + ', \'' + id + '\');" class="' + cls + ' fondopartido" id="'+id+'">' 
 								+ '<span class="day">' + dow.substr(-2) + '</span>'
 								+ '<br/>'
 					if(tarde){
@@ -274,7 +274,7 @@ var ui = {
 		bubbleInit();
 	},
 	
-	/*
+	
 	// Render Clock
 	"renderTime" : function(){
 		var now = new Date();
@@ -297,7 +297,7 @@ var ui = {
 		}
 		
 		setTimeout(doit,500);
-	},*/
+	},
 	
 	
 	// Initialization
@@ -306,7 +306,7 @@ var ui = {
 	
 };
 
-function reservar(dia){
+function reservar(dia,id){
 	if(logged)
 	{
 		/*$('.popup').unbind('mouseover').unbind('mouseout');
@@ -318,14 +318,48 @@ function reservar(dia){
 		
 		$('#persona').val(nombre);
 		
-		$('.nuevaReserva').css({
-			opacity:0,
-			display:'block'
-		})
-		.animate({
-			opacity : 1
-		}, 500, 'swing');
+		var manOK = true;
+		var tarOK = true;
+		if($('#'+id).children().length != 0){
+			var contenedor = $('#'+id).children()[2].children[0].children[0].children;
+			if($(contenedor[0]).hasClass('TopOfCell'))
+				manOK = false;
+				
+			if($(contenedor[1]).hasClass('BottomOfCell'))	
+				tarOK = false;
+		}
+
+		if(manOK){
+			$('#rBma').removeAttr('disabled')
+					.attr('checked','true');
+		}
+		else{
+			$('#rBma').attr('disabled','true')
+					.attr('checked','false');
+			$('#rBtar').attr('checked','true');			
+		}
 		
+		if (tarOK) {
+			$('#rBtar').removeAttr('disabled');
+		}
+		else{
+			$('#rBtar').attr('disabled','true');
+		}
+			
+		if (manOK || tarOK) {
+			$('#txtaMot').val('');
+			// mostrar la ventana
+			$('.nuevaReserva').css({
+				opacity:0,
+				display:'block'
+			})
+			.animate({
+				opacity : 1
+			}, 500, 'swing');
+		}
+		else{
+			alert('No hay periodos disponibles este día')
+		}
 		/*bubbleInit();*/
 	}
 }
@@ -362,11 +396,11 @@ ui.init();
 
 // Load
 $(document).ready(function(){
-		
+	logged = false;
 	// Render the calendar
 	ui.renderCalendar();
 	
-	/*ui.renderTime();*/
+	ui.renderTime();
 	
 	$(window).resize (function() {ajustarColores();});
 	
@@ -378,5 +412,9 @@ $(document).ready(function(){
 			display: 'none'
 		});
 	})
+	
+	$('#btnClose').click(procesarReserva);
+	$('#btnLogin').click(login);
+	
 
 });
