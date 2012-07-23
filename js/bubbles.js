@@ -2,19 +2,23 @@
 	Bubble Tooltip code. From Jquery 4 Designers. @rem.
 */
 function bubbleInit() {
+	var funcShowPopup;
+	var funcHidePopup;
+	var info = $('.popup').css('opacity', 0);
+	var distance = 10;
+	var time = 250;
+	var hideDelay = 250;
+
+	var hideDelayTimer = null;
+
+	var beingShown = false;
+	var shown = false;
 	$('.bubbleInfo').each(function () {
-		var distance = 10;
-		var time = 250;
-		var hideDelay = 250;
-
-		var hideDelayTimer = null;
-
-		var beingShown = false;
-		var shown = false;
-		var trigger = $('.trigger', this);
-		var info = $('.popup').css('opacity', 0);
 		
-		function showPopup(e) {
+		var trigger = $('.trigger', this);
+		
+		
+		funcShowPopup = function(e) {
 			if (hideDelayTimer) clearTimeout(hideDelayTimer);
 			if (beingShown || shown) {
 				// don't trigger the animation again
@@ -53,7 +57,7 @@ function bubbleInit() {
 					var newTop = target_offset.top - info.height() - 10;
 					if (newTop < 0) {
 						newTop = target_offset.top + $(this).height();
-					};
+					}
 					
 					info.css({
 						top : (newTop) + "px",
@@ -74,37 +78,35 @@ function bubbleInit() {
 			e.stopPropagation();
 			return false;
 		
-			}
+		};
 			
-			function hidePopup(e) {
-				if (hideDelayTimer)
-					clearTimeout(hideDelayTimer);
-				hideDelayTimer = setTimeout(function() {
-					hideDelayTimer = null;
-					info.animate({
-						top : '+=' + distance + 'px',
-						opacity : 0
-					}, time, 'swing', function() {
-						shown = false;
-					})
-					.empty()
-					.removeAttr('style')
-					.css('opacity',0)
-					.css('display','none');
+		funcHidePopup = function(e) {
+			if (hideDelayTimer)
+				clearTimeout(hideDelayTimer);
+			hideDelayTimer = setTimeout(function() {
+				hideDelayTimer = null;
+				info.animate({
+					top : '+=' + distance + 'px',
+					opacity : 0
+				}, time, 'swing', function() {
+					shown = false;
+				});
+				info.empty()
+				.removeAttr('style')
+				.css('opacity',0)
+				.css('display','none');
 
-				}, hideDelay);
-				e.stopPropagation();
-				return false;
-			}
-
-
-		info.bind('mouseover',showPopup);
-		info.bind('mouseout',hidePopup);
+			}, hideDelay);
+			e.stopPropagation();
+			return false;
+		};
 		
-		trigger.each(function(){
-			$(this).bind('mouseover',showPopup);
-			$(this).bind('mouseout',hidePopup); 
-		});
+		trigger.bind('mouseover',funcShowPopup)
+				.bind('mouseout',funcHidePopup); 
+			
+		info.bind('mouseover',funcShowPopup)
+			.bind('mouseout',funcHidePopup);
 	});
+	
 };
 
