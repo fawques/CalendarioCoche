@@ -13,12 +13,13 @@
 
 	$response = "[";
 	while($row = mysql_fetch_array($result))
-	  {
+	{
 		//  {"date":"11/22","title":"victor","periodo":"tarde","motivo":"porque me apetece"}
-	  $response =  $response . "{\"date\":\"" . $row['Fecha'] . "\",\"title\":\"" . $row['Persona'] . "\",\"periodo\":\"" . $row['Periodo'] . "\",\"motivo\":\"" . $row['Motivo'] . "\"}";
-	  $response =  $response . ",";
-	  }
-	$response = substr($response,0,-1);
+		$response =  $response . "{\"date\":\"" . $row['Fecha'] . "\",\"title\":\"" . $row['Persona'] . "\",\"periodo\":\"" . $row['Periodo'] . "\",\"motivo\":\"" . $row['Motivo'] . "\"}";
+		$response =  $response . ",";
+	}
+	if($response != "[")
+		$response = substr($response,0,-1);
 	$response =  $response . "]";
 	
 	echo $response;
